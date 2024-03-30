@@ -13,3 +13,10 @@ app.get('/users', async (req, res) => {
     res.status(500). json({ message: err.message });
 }
 });
+
+// Get a single user
+app.get('/users/:id', getUser, (req, res) => {
+    res.json(res.user);
+    });
+
+
