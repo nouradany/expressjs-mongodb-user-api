@@ -68,3 +68,14 @@ app.patch('/users/:id', getUser, async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 });
+
+// Delete a user
+app.delete('/users/:id', getUser, async (req, res) => {
+    try {
+    await res.user. remove();
+    res. json({ message: 'User deleted' });
+    } catch (err) {
+    res.status(500). json({ message: err.message });
+}
+
+});
