@@ -33,3 +33,38 @@ app.post('/users', async (req, res) => {
     res.status(400). json({ message: err.message });
 }
 });
+
+
+// Create a new user
+app.post('/users', async (req, res) => {
+    const user = new User({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+    });   
+    try {
+        const newUser = await user.save();
+        res.status(201).json(newUser);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
+// Update a user
+app.patch('/users/:id', getUser, async (req, res) => {
+    if (req.body.username !== null) {
+        res.user.username = req.body.username;
+    }
+    if (req.body.email !== null) {
+        res.user.email = req.body.email;
+    }  
+    if (req.body.password !== null) {
+        res.user.password = req.body.password;
+    }   
+    try {
+        const updatedUser = await res.user.save();
+        res.json(updatedUser);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
